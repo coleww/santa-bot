@@ -53,10 +53,6 @@ client.lpop('santafy', function (err, user) {
               } else {
                 console.log(t.id_str, 'reply:', data)
                 // record current timestamp for this user
-                client.set('&SANTA' + t.target, timestamp + '', function () {
-                  client.end()
-                  throw "a party"
-                })
               }
             })
           }
