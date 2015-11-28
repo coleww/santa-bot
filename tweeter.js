@@ -20,10 +20,12 @@ function naughtyOrNice(un, cb){
     console.log(err, targ)
     var the_tweets = JSON.parse(targ.body).data.map(function (l) {return l.text})
     var total = the_tweets.map(function (t) {
-      return sentiment(t)
+      return sentiment(t).Score
     }).reduce(function (a, b) {
       return a + b
     }, 0)
+
+    console.log(total, the_tweets.length)
     cb(total / the_tweets.length)
   })
 }
