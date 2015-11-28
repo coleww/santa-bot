@@ -52,18 +52,27 @@ client.lpop('santafy', function (err, user) {
               naughtyOrNice(t.target, function(d){
                 var listName = d >= 0 ? 'nice' : 'naughty'
                 if (config.live) {
-                  T.post('lists/members/create', {slug: listName, owner_screen_name: 'santaBot5000', user_id: t.id_str}, function (err, data, response) {
-                    if (err) {
-                      console.log(t.id_str, 'replyerr:', err)
+                  T.post('friendships/create', {screen_name: t.target}, function (e, d, r){
+                    if (e) {
+                      console.log(t.id_str, 'replyerr:', e)
                       // close connection and program
                       client.end()
                       throw "a party"
                     } else {
-                      console.log(t.id_str, 'reply:', data)
-                      // record current timestamp for this user
-                      client.set('&SANTA' + t.target, timestamp + '', function () {
-                        client.end()
-                        throw "a party"
+                      T.post('lists/members/create', {slug: listName, owner_screen_name: 'santaBot5000', user_id: t.id_str}, function (err, data, response) {
+                        if (err) {
+                          console.log(t.id_str, 'replyerr:', err)
+                          // close connection and program
+                          client.end()
+                          throw "a party"
+                        } else {
+                          console.log(t.id_str, 'reply:', data)
+                          // record current timestamp for this user
+                          client.set('&SANTA' + t.target, timestamp + '', function () {
+                            client.end()
+                            throw "a party"
+                          })
+                        }
                       })
                     }
                   })
