@@ -5,7 +5,7 @@ var stream = T.stream('user')
 var redis = require('redis')
 var client = redis.createClient()
 
-stream.on('event', function (t) {
+stream.on('follow', function (t) {
   console.log(t)
   client.rpush('santafy', JSON.stringify({target: t.source.screen_name, id_str: t.source.id_str}), redis.print)
 })
