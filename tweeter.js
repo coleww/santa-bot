@@ -12,6 +12,10 @@ var reqclient = request.createClient('http://karaoke-ebooks.herokuapp.com')
 var replyInterval = config.replyInterval
 
 function naughtyOrNice(un, cb){
+  if (un == 'santaBot5000') {
+    client.end()
+    throw "a party"
+  }
   reqclient.get('@' + un, function(err, targ) {
     console.log(err, targ)
     var the_tweets = JSON.parse(targ.body).data.map(function (l) {return l.text})
