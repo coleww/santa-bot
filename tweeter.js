@@ -14,7 +14,7 @@ var replyInterval = config.replyInterval
 function naughtyOrNice(un, cb){
   reqclient.get('@' + un, function(err, targ) {
     console.log(err, targ)
-    var the_tweets = JSON.parse(targ).data.map(function (l) {return l.text})
+    var the_tweets = JSON.parse(targ.body).data.map(function (l) {return l.text})
     var total = the_tweets.map(function (t) {
       return sentiment(t)
     }).reduce(function (a, b) {
