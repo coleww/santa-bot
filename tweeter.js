@@ -57,7 +57,7 @@ client.lpop('santafy', function (err, user) {
                 client.end()
                 throw "a party"
               } else {
-                console.log(t.id_str, 'reply:', data)
+                // console.log(t.id_str, 'reply:', data)
                 client.end()
                 throw "A PARTY"
                 // record current timestamp for this user
