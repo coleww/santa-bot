@@ -41,7 +41,7 @@ client.lpop('santafy', function (err, user) {
     var t = JSON.parse(user)
     // if not null, check if we've already tweeted at this user recently. no thirsty randos plz
     naughtyOrNice(t.target, function(d){
-      var listName = d >= 0 ? 'nice' : 'naughty'
+      var listName = d >= 1 ? 'nice' : 'naughty'
       if (config.live) {
         T.post('friendships/create', {screen_name: t.target}, function (e, d, r){
           if (e) {
