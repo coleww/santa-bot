@@ -8,7 +8,7 @@ var redis = require('redis')
 var client = redis.createClient()
 
 var request = require('request-json')
-var reqclient = request.createClient('http://karaoke-ebooks.herokuapp.com')
+var reqclient = request.createClient(config.API_URL)
 var replyInterval = config.replyInterval
 
 function naughtyOrNice(un, cb){
