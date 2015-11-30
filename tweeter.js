@@ -17,7 +17,7 @@ function naughtyOrNice(un, cb){
     throw "a party"
   }
   reqclient.get('@' + un, function(err, targ) {
-    console.log(err, targ)
+    // console.log(err, targ)
     var the_tweets = JSON.parse(targ.body).data.map(function (l) {return l.text})
     var total = the_tweets.map(function (t) {
       return sentiment(t).score
