@@ -17,5 +17,5 @@ T.get('lists/members', {owner_screen_name: 'santaBot5000', slug: 'nice'}, functi
 })
  
 function check (list) {
-  console.log(list) 
+  console.log(list.users.map(function (u) {return u.screen_name})) 
 }
