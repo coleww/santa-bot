@@ -7,8 +7,6 @@ var fs = require('fs')
 var redis = require('redis')
 var client = redis.createClient()
 
-var request = require('request-json')
-var reqclient = request.createClient(config.API_URL)
 var replyInterval = config.replyInterval
 
 function naughtyOrNice(un, cb){
@@ -16,9 +14,9 @@ function naughtyOrNice(un, cb){
     client.end()
     throw "a party"
   }
-  reqclient.get('@' + un, function(err, targ) {
+  T.get('statuses/user_timeline', {screen_name: un, count: 200}, function(err, targ) {
     // console.log(err, targ)
-    var the_tweets = JSON.parse(targ.body).data.map(function (l) {return l.text})
+    var the_tweets = JSON.parse(targ).map(function (l) {return l.text})
     var total = the_tweets.map(function (t) {
       return sentiment(t).score
     }).reduce(function (a, b) {
