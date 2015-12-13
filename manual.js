@@ -22,7 +22,7 @@ function naughtyOrNice(un, cb){
   }
   T.get('statuses/user_timeline', {screen_name: un, count: 200}, function(err, targ) {
     // console.log(err, targ)
-    var the_tweets = JSON.parse(targ).map(function (l) {return l.text})
+    var the_tweets = targ.map(function (l) {return l.text})
     var total = the_tweets.map(function (t) {
       return sentiment(t).score
     }).reduce(function (a, b) {
