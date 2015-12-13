@@ -41,30 +41,21 @@ function naughtyOrNice(un, cb){
     // if not null, check if we've already tweeted at this user recently. no thirsty randos plz
     naughtyOrNice(t.target, function(d){
       var listName = d >= 0.65 ? 'nice' : 'naughty'
-      if (config.live) {
-        T.post('friendships/create', {screen_name: t.target}, function (e, d, r){
-          if (e) {
-            console.log(t.id_str, 'replyerr:', e)
-            // close connection and program
-            client.end()
-            throw "a party"
-          } else {
+
             T.post('lists/members/create', {slug: listName, owner_screen_name: 'santaBot5000', user_id: t.id_str}, function (err, data, response) {
               if (err) {
                 console.log(t.id_str, 'replyerr:', err)
                 // close connection and program
-                client.end()
+                
                 throw "a party"
               } else {
                 // console.log(t.id_str, 'reply:', data)
                 client.end()
-                throw "A PARTY"
+                throw "A YAY"
                 // record current timestamp for this user
               }
             })
-          }
-        })
-      }
+      
     })
 
 // OTHER DEALINGS IN THE SOFTWARE.
